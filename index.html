@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bateria Virtual</title>
+	<style>
+		body {
+			background-color: #282828;
+			color: #fff;
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+
+		.key {
+			display: inline-block;
+			margin: 10px;
+			padding: 20px;
+			background-color: #444;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.key:hover {
+			background-color: #666;
+		}
+	</style>
+</head>
+<body>
+	<div class="key" data-key="65">
+		<p>Q</p>
+		<span>Snare</span>
+	</div>
+	<div class="key" data-key="83">
+		<p>S</p>
+		<span>Kick</span>
+	</div>
+	<div class="key" data-key="68">
+		<p>D</p>
+		<span>Tom</span>
+	</div>
+	<div class="key" data-key="70">
+		<p>F</p>
+		<span>Cymbal</span>
+	</div>
+
+	<script>
+		// Mapa de sons para cada tecla da bateria
+		const sounds = {
+			65: 'snare.wav',
+			83: 'kick.wav',
+			68: 'tom.wav',
+			70: 'cymbal.wav'
+		};
+
+		// Função para tocar o som correspondente à tecla pressionada
+		function playSound(keyCode) {
+			if (sounds[keyCode]) {
+				const sound = new Audio(sounds[keyCode]);
+				sound.play();
+			}
+		}
+
+		// Event listener para detectar as teclas pressionadas
+		document.addEventListener('keydown', (event) => {
+			const keyCode = event.keyCode;
+			playSound(keyCode);
+		});
+
+		// Event listener para detectar os cliques nas teclas
+		const keys = document.querySelectorAll('.key');
+		keys.forEach((key) => {
+			key.addEventListener('click', () => {
+				const keyCode = key.getAttribute('data-key');
+				playSound(keyCode);
+			});
+		});
+	</script>
+</body>
+</html>
